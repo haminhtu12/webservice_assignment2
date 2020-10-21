@@ -126,7 +126,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Service1.svc" />
+    <Content Include="Service\Comment\CommentService.svc" />
     <Content Include="Service\Customer\CustomerService.svc" />
+    <Content Include="Service\Type_Blog\Type_blogService.svc" />
     <Content Include="Service\User\UserService.svc" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -143,11 +145,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Service\Blog\IBlogservice.cs" />
-    <Compile Include="Service\Comment\test.cs" />
+    <Compile Include="Service\Comment\CommentService.svc.cs">
+      <DependentUpon>CommentService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\Comment\ICommentService.cs" />
     <Compile Include="Service\Customer\CustomerService.svc.cs">
       <DependentUpon>CustomerService.svc</DependentUpon>
     </Compile>
     <Compile Include="Service\Customer\ICustomerService.cs" />
+    <Compile Include="Service\Type_Blog\IType_blogService.cs" />
+    <Compile Include="Service\Type_Blog\Type_blogService.svc.cs">
+      <DependentUpon>Type_blogService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Service\User\IUserService.cs" />
     <Compile Include="Models\DataModels\Blog.cs" />
     <Compile Include="Models\DataModels\Comments.cs" />
@@ -167,7 +176,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Service\Type_Blog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

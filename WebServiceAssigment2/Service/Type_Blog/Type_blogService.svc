@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WebServiceAssigment2.Service.Type_Blog.Type_blogService" CodeBehind="Type_blogService.svc.cs" %>
