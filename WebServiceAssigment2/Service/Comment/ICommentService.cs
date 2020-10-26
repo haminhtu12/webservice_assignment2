@@ -28,20 +28,20 @@ namespace WebServiceAssigment2.Service.Comment
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/CreateComments")]
-        bool AddComment(Comments comments);
+        bool AddComment(Comments comments, string email, string passWord);
 
         [WebInvoke(Method = "PUT",
                RequestFormat = WebMessageFormat.Json,
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/EditComment")]
-        bool UpdateComment(Comments comments);
+        bool UpdateComment(Comments comments, string email, string passWord);
 
         [WebInvoke(Method = "DELETE",
                RequestFormat = WebMessageFormat.Json,
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/DeleteComment")]
-        bool DeleteComment(int id);
+        bool DeleteComment(int id, string email, string passWord);
     }
 }

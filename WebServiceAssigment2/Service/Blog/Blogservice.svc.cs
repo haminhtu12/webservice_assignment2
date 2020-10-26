@@ -14,13 +14,23 @@ namespace WebServiceAssigment2
     {
         FRDbContext db = new FRDbContext();
 
-        public bool AddBlog(Blog bl)
+        public bool AddBlog(Blog bl, string userName, string passWord)
         {
             try
             {
-                db.Blogs.Add(bl);
-                db.SaveChanges();
-                return true;
+                var obj = db.Users.Where(a => a.UserName.Equals(userName)
+                          && a.Password.Equals(passWord)).FirstOrDefault();
+                if (obj != null)
+                {
+                    db.Blogs.Add(bl);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             catch
             {
@@ -29,13 +39,19 @@ namespace WebServiceAssigment2
 
         }
 
-        public bool DeleteBlog(int id)
+        public bool DeleteBlog(int id, string userName, string passWord)
         {
             try
             {
-                var data = db.Blogs.Where(x => x.ID == id).First();
-                db.Blogs.Remove(data);
-                db.SaveChanges();
+                var obj = db.Users.Where(a => a.UserName.Equals(userName)
+                          && a.Password.Equals(passWord)).FirstOrDefault();
+                if (obj != null)
+                {
+
+                    var blog = db.Blogs.Where(x => x.ID == id).First();
+                    db.Blogs.Remove(blog);
+                    db.SaveChanges();
+                }
 
                 //Blog st = (   from blog in db.Blogs
                 //              where blog.ID == id
@@ -56,14 +72,29 @@ namespace WebServiceAssigment2
 
         }
 
-        public bool UpdateBlog(Blog bl)
+        public bool UpdateBlog(Blog bl, string userName, string passWord)
         {
-            var blog = db.Blogs.Where(x => x.ID == bl.ID).First();
-            db.Blogs.Remove(blog);
-            db.Blogs.Add(bl);
-            db.SaveChanges();
-            //db.SubmitChanges();
-            return true;
+            try
+            {
+                var obj = db.Users.Where(a => a.UserName.Equals(userName)
+          && a.Password.Equals(passWord)).FirstOrDefault();
+                if (obj != null)
+                {
+
+                    var blog = db.Blogs.Where(x => x.ID == bl.ID).First();
+                    db.Blogs.Remove(blog);
+                    db.Blogs.Add(bl);
+                    db.SaveChanges();
+                    return true;
+                }
+                //db.SubmitChanges();
+                return false;
+
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

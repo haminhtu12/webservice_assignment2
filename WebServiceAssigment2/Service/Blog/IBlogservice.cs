@@ -27,21 +27,21 @@ namespace WebServiceAssigment2
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/CreateBlog")]
-        bool AddBlog(Blog bl);
+        bool AddBlog(Blog bl, string userName , string passWord);
 
         [WebInvoke(Method = "PUT",
                RequestFormat = WebMessageFormat.Json,
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/EditBlog")]
-        bool UpdateBlog(Blog st);
+        bool UpdateBlog(Blog st, string userName, string passWord);
 
         [WebInvoke(Method = "DELETE",
                RequestFormat = WebMessageFormat.Json,
                ResponseFormat = WebMessageFormat.Json,
                 BodyStyle = WebMessageBodyStyle.Bare,
                UriTemplate = "api/v1/DeleteBlog")]
-        bool DeleteBlog(int id);
+        bool DeleteBlog(int id, string userName, string passWord);
 
     }
 }

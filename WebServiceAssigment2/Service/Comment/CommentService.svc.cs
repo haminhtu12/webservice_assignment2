@@ -14,13 +14,24 @@ namespace WebServiceAssigment2.Service.Comment
     {
         FRDbContext db = new FRDbContext();
 
-        public bool AddComment(Comments comments)
+        public bool AddComment(Comments comments, string email, string passWord)
         {
             try
             {
-                db.Comments.Add(comments);
-                db.SaveChanges();
-                return true;
+                var obj = db.Customers.Where(a => a.Email.Equals(email)
+          && a.Password.Equals(passWord)).FirstOrDefault();
+                if (obj != null)
+                {
+                    db.Comments.Add(comments);
+                    db.SaveChanges();
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             catch
             {
@@ -28,14 +39,24 @@ namespace WebServiceAssigment2.Service.Comment
             }
         }
 
-        public bool DeleteComment(int id)
+        public bool DeleteComment(int id, string email, string passWord)
         {
             try
             {
-                var cm = db.Comments.Find(id);
-                db.Comments.Remove(cm);
-                db.SaveChanges();
-                return true;
+                var obj = db.Customers.Where(a => a.Email.Equals(email)
+                            && a.Password.Equals(passWord)).FirstOrDefault();
+                if (obj != null)
+                {
+
+                    var cm = db.Comments.Find(id);
+                    db.Comments.Remove(cm);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
@@ -49,12 +70,22 @@ namespace WebServiceAssigment2.Service.Comment
             return cm;
         }
 
-        public bool UpdateComment(Comments comments)
+        public bool UpdateComment(Comments comments, string email, string passWord)
         {
-            var cm = db.Comments.Where(x => x.ID == comments.ID).First();
-            db.Comments.Remove(cm);
-            db.Comments.Add(cm);
-            db.SaveChanges();
+            var obj = db.Customers.Where(a => a.Email.Equals(email)
+                        && a.Password.Equals(passWord)).FirstOrDefault();
+            if (obj != null)
+            {
+
+                var cm = db.Comments.Where(x => x.ID == comments.ID).First();
+                db.Comments.Remove(cm);
+                db.Comments.Add(cm);
+                db.SaveChanges();
+            }
+            else
+            {
+                return false;
+            }
             return true;
         }
     }
